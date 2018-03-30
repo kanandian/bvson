@@ -11,4 +11,10 @@ public class EntryController {
         return "index";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+
 }

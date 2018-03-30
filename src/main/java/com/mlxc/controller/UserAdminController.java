@@ -45,6 +45,8 @@ public class UserAdminController {
         resultModel.setErrmsg("注册成功");
         resultModel.setData("/index");
 
+        login(new LoginModel(registerModel.getUserName(), registerModel.getPassword()));
+
         return resultModel;
     }
 

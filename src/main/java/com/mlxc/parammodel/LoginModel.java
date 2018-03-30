@@ -8,6 +8,11 @@ public class LoginModel {
     public LoginModel() {
     }
 
+    public LoginModel(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
     public String getUserName() {
         return userName;
     }
