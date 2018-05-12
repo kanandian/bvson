@@ -7,6 +7,8 @@ import com.mlxc.entityrelation.UserActivity;
 import com.mlxc.entityrelation.UserCommodity;
 import com.mlxc.parammodel.LoginModel;
 import com.mlxc.parammodel.RegisterModel;
+import com.mlxc.parammodel.UpdateInfoModel;
+import com.mlxc.parammodel.UpdatePasswordModel;
 import com.mlxc.service.ActivityService;
 import com.mlxc.service.CommodityService;
 import com.mlxc.service.UserService;
@@ -76,6 +78,52 @@ public class UserAdminController {
             return resultModel;
         }
 
+    }
+
+    @PostMapping("/update_user_info")
+    public ResultModel updateUserInfo(UpdateInfoModel updateInfoModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户未登录！");
+            return resultModel;
+        }
+
+        user.setEmail(updateInfoModel.getEmail());
+        user.setPhoneNumber(updateInfoModel.getPhoneNumber());
+
+        userService.addUser(user);
+        resultModel.setErrcode(1);
+
+        return resultModel;
+    }
+
+    @PostMapping("/update_user_password")
+    public ResultModel updateUserPassword(UpdatePasswordModel updatePasswordModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户未登录！");
+            return resultModel;
+        }
+
+        if (user.getPassword().equals(updatePasswordModel.getOpassword())) {
+            user.setPassword(updatePasswordModel.getNpassword());
+
+            userService.addUser(user);
+            resultModel.setErrcode(1);
+            return resultModel;
+        } else {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("原始密码输入不正确");
+            return resultModel;
+        }
     }
 
     @GetMapping("/get-userinfo")

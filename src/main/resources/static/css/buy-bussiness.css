@@ -1,0 +1,26 @@
+.bussinesses-container {
+    margin-left: 64px;
+}
+
+.bussiness-price {
+    color: #ff2832;
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.bussiness-name {
+    color: #646464;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+}
+
+.bussiness-item {
+    display: inline-block;
+    width: 154px;
+    border: 1px solid #e6e6e6;
+}
+
+.bussiness-image {
+    margin: 0 auto;
+    display: block;
+}

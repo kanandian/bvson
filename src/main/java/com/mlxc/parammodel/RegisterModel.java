@@ -10,6 +10,9 @@ public class RegisterModel {
     private String id;
     private int userType;
 
+    private String phoneNumber;
+    private String email;
+
 
     public RegisterModel() {
     }
@@ -50,6 +53,22 @@ public class RegisterModel {
         return userType;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setUserType(int userType) {
         this.userType = userType;
     }
@@ -62,6 +81,8 @@ public class RegisterModel {
         user.setId(this.getId());
         user.setUserName(this.getUserName());
         user.setUserType(this.getUserType());
+        user.setPhoneNumber(this.getPhoneNumber());
+        user.setEmail(this.getEmail());
 
         return user;
     }

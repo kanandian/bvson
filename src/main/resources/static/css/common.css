@@ -1,0 +1,12 @@
+.bottom {
+    position: fixed;
+    bottom: 36px;
+    left: 0px;
+    right: 0px;
+}
+
+.mbody {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}

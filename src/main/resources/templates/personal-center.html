@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <link rel="stylesheet" href="css/personal-center.css" />
+    <link rel="stylesheet" href="css/common.css" />
+
+    <style>
+        .layui-form-label {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header"></div>
+
+<div class="mbody">
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">个人信息</li>
+            <li>修改密码</li>
+            <li>购物车</li>
+            <li>参加活动</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form" action="">
+                    <!--<div class="layui-form-item">-->
+                        <!--<label class="layui-form-label">用户名</label>-->
+                        <!--<div class="layui-input-block">-->
+                            <!--<input id="user_name" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电话号码</label>
+                        <div class="layui-input-block">
+                            <input id="phone_number" type="tel" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电子邮箱</label>
+                        <div class="layui-input-block">
+                            <input id="email" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-block">
+                            <div id="btn_update_info" class="layui-btn layui-btn-lg layui-btn-normal">修改信息</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">原始密码</label>
+                    <div class="layui-input-block">
+                        <input id="opassword" type="password" name="title" required  lay-verify="required" placeholder="请输入原始密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">新密码</label>
+                    <div class="layui-input-block">
+                        <input id="npassword" type="password" name="title" required  lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-block">
+                        <input id="cpassword" type="password" name="title" required  lay-verify="required" placeholder="请输入确认密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"></label>
+                    <div class="layui-input-block">
+                        <div id="btn_update_password" class="layui-btn layui-btn-lg layui-btn-normal">修改密码</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer bottom"></div>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script type="text/javascript" src="js/personal-center.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+
+
+</body>
+</html>

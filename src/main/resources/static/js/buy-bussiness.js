@@ -1,0 +1,34 @@
+var $bussinesses_content = $('#bussinesses_content')
+
+var bindAll = function () {
+    queryBussinessesInfo()
+}
+
+var queryBussinessesInfo = function () {
+    var url = '/get-commodities'
+
+    $.get(url, function (res) {
+        if (res.errcode == 1) {
+            var data = res.data
+
+            for (var i=0;i<data.length;i++) {
+                var tmp = '<div class="bussiness-item">\n' +
+                    '            <img src="'+data[i].imageURL+'" class="bussiness-image" width="100px" height="64px" />\n' +
+                    '            <div class="bussiness-name" style="margin-top: 6px;margin-left: 18px;">'+data[i].commodityName+'</div>\n' +
+                    '            <div class="bussiness-price" style="margin-left: 18px;"><span>￥</span><span class="bussiness-price-number">'+data[i].price+'</span></div>\n' +
+                    '        </div>'
+
+                $bussinesses_content.append(tmp)
+            }
+
+        } else {
+            alert(res.errmsg)
+        }
+    })
+}
+
+var main = function () {
+    bindAll()
+}
+
+main()
