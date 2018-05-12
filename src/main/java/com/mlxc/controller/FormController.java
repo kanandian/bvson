@@ -65,7 +65,7 @@ public class FormController {
         }
 
         if (multipartFile != null && multipartFile.getContentType().startsWith("image")) {
-            String imageName = String.valueOf(new Date().getTime()); //获取原文件名
+            String imageName = String.valueOf(new Date().getTime())+".png"; //获取原文件名
             InputStream inputStream = multipartFile.getInputStream();
             FileOutputStream fileOutputStream = new FileOutputStream(imagePath+"/"+imageName);
             byte[] buf = new byte[1024];

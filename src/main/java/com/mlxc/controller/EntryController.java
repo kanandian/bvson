@@ -1,5 +1,6 @@
 package com.mlxc.controller;
 
+import groovy.lang.GrabExclude;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,5 +46,10 @@ public class EntryController {
     @GetMapping("/add-commodity")
     public String addCommodity() {
         return "add-commodity";
+    }
+
+    @GetMapping("/commodity-details")
+    public String commodityDetails() {
+        return "commodity-details";
     }
 }

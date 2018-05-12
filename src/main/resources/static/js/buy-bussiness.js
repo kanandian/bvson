@@ -12,13 +12,18 @@ var queryBussinessesInfo = function () {
             var data = res.data
 
             for (var i=0;i<data.length;i++) {
+                var commodityId = data[i].commodityId
                 var tmp = '<div class="bussiness-item">\n' +
                     '            <img src="'+data[i].imageURL+'" class="bussiness-image" width="100px" height="64px" />\n' +
                     '            <div class="bussiness-name" style="margin-top: 6px;margin-left: 18px;">'+data[i].commodityName+'</div>\n' +
                     '            <div class="bussiness-price" style="margin-left: 18px;"><span>￥</span><span class="bussiness-price-number">'+data[i].price+'</span></div>\n' +
                     '        </div>'
 
-                $bussinesses_content.append(tmp)
+                var $item = $(tmp)
+                $item.on('click', function () {
+                    window.location.href = '/commodity-details?commodityId='+commodityId
+                })
+                $bussinesses_content.append($item)
             }
 
         } else {

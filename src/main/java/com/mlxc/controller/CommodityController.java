@@ -47,6 +47,19 @@ public class CommodityController {
         return resultModel;
     }
 
+    @GetMapping("/commodity-info")
+    public ResultModel getCommodityInfo(long commodityId) {
+        ResultModel resultModel = new ResultModel();
+
+        Commodity commodity = commodityService.getCommodityById(commodityId);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+        resultModel.setData(commodity);
+
+        return resultModel;
+    }
+
 
 
 //    @PostMapping("/add-commodity")
