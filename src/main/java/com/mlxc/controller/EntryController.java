@@ -52,4 +52,9 @@ public class EntryController {
     public String commodityDetails() {
         return "commodity-details";
     }
+
+    @GetMapping("/shopping-cart")
+    public String shoppingCart() {
+        return "shopping-cart";
+    }
 }

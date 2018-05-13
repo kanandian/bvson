@@ -1,0 +1,144 @@
+.shop-cart-item {
+    background-color: #fcfcfc;
+    border: 1px solid #cccccc;
+    height: 108px;
+    line-height: 108px;
+}
+
+.shop-cart-item div {
+    float: left;
+    width: 16%;
+    text-align: right;
+    height: inherit;
+    line-height: inherit;
+}
+
+.shop-cart-item .div-img {
+    line-height: 94px;
+}
+
+.shop-cart-item .div-check {
+    width: 2%;
+}
+
+.shop-cart-item .clr {
+    float: none;
+}
+
+.shop-cart-item .cart-commodity-name {
+    padding: 6px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+}
+
+.shop-cart-item .cart-commodity-count {
+    line-height: 108px;
+}
+
+.cart-commodity-price {
+    color: #3c3c3c;
+    font-weight: 700;
+    font-family: Verdana,Tahoma,arial;
+}
+
+.cart-commodity-totalprice {
+    color: #f40;
+    font-weight: 700;
+    font-style: normal;
+    font-family: Verdana,Tahoma,arial;
+}
+
+.btn_num_admin {
+    background-color: #f0f0f0;;
+    width: 16px;
+    height: 17px;
+}
+
+.commodity-count {
+    width: 18px;
+}
+
+.shop-cart-item .position-count {
+    display: inline-block;
+    width: 156px;
+}
+
+.statictis-bottom {
+    background-color: #e5e5e5;
+    text-align: right;
+    height: 50px;
+    width: 990px;
+    position: fixed;
+    bottom: 0px;
+    left: 12%;
+    right: 0px;
+}
+
+.cart-count {
+    display: inline-block;
+    width: 102px;
+    height: 48px;
+    line-height: 48px;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+}
+
+.cart-price {
+    display: inline-block;
+    width: 162px;
+    height: 48px;
+    line-height: 48px;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 12px;
+}
+
+#cart_count {
+    color: #f40;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: tohoma,arial;
+}
+
+#cart_price {
+    color: #f40;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: tohoma,arial;
+}
+
+.btn-account {
+    margin-left: 12px;
+    height: inherit;
+    line-height: 3.6;
+    width: 128px;
+}
+
+.btn-remove {
+    color: #3c3c3c;
+    cursor: pointer;
+}
+
+.disabled {
+    background: #B0B0B0;
+    color: #fff;
+    border-left: 1px solid #e7e7e7;
+    width: 119px;
+    cursor: not-allowed;
+    text-decoration: none;
+}

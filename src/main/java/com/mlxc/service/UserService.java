@@ -1,6 +1,7 @@
 package com.mlxc.service;
 
 import com.mlxc.entity.Activity;
+import com.mlxc.entity.ShoppingCartItem;
 import com.mlxc.entity.User;
 import com.mlxc.entityrelation.UserActivity;
 import com.mlxc.entityrelation.UserCommodity;
@@ -22,6 +23,14 @@ public interface UserService {
 
     public void buyCommodity(UserCommodity userCommodity, double price);
 
+    public void buyCommodities(List<UserCommodity> userCommodityList, double totalPrice);
+
     public List<BuyRecord> buyRecords(long userId);
+
+    public void addShopCart(ShoppingCartItem shoppingCartItem);
+
+    public void removeShopCart(long cartId);
+
+    public List<ShoppingCartItem> getShopCart(long userId);
 
 }

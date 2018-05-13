@@ -3,6 +3,7 @@ package com.mlxc.service.impl;
 import com.mlxc.dao.*;
 import com.mlxc.entity.Activity;
 import com.mlxc.entity.Commodity;
+import com.mlxc.entity.ShoppingCartItem;
 import com.mlxc.entity.User;
 import com.mlxc.entityrelation.UserActivity;
 import com.mlxc.entityrelation.UserCommodity;
@@ -34,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private CommodityRepository commodityRepository;
+
+    @Autowired
+    private ShopCartRepository shopCartRepository;
 
 
     @Override
@@ -104,6 +108,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void buyCommodities(List<UserCommodity> userCommodityList, double totalPrice) {
+        for (UserCommodity userCommodity : userCommodityList) {
+            Commodity commodity = commodityRepository.findOne(userCommodity.getCommodityId());
+            commodity.setRest(commodity.getRest()-userCommodity.getNum());
+            commodityRepository.save(commodity);
+
+            double price = commodity.getPrice()*userCommodity.getNum();
+            User merchant = userRepository.findOne(commodity.getUserid());
+            merchant.setBalance(merchant.getBalance()+price);
+            userRepository.save(merchant);
+
+            userCommodityReposity.save(userCommodity);
+        }
+
+        if (userCommodityList != null && !userCommodityList.isEmpty()) {
+            User user = userRepository.findOne(userCommodityList.get(0).getUserId());
+            user.setBalance(user.getBalance()-totalPrice);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
     @Transactional
     public List<BuyRecord> buyRecords(long userId) {
         List<UserCommodity> userCommodityList = userCommodityReposity.findByUserId(userId);
@@ -125,6 +151,22 @@ public class UserServiceImpl implements UserService {
         }
 
         return buyRecordList;
+    }
+
+    @Override
+    public void addShopCart(ShoppingCartItem shoppingCartItem) {
+        shopCartRepository.save(shoppingCartItem);
+    }
+
+    @Override
+    public void removeShopCart(long cartId) {
+        shopCartRepository.delete(cartId);
+    }
+
+    @Override
+    public List<ShoppingCartItem> getShopCart(long userId) {
+        List<ShoppingCartItem> shoppingCartItems = shopCartRepository.findByUserId(userId);
+        return shoppingCartItems;
     }
 
 

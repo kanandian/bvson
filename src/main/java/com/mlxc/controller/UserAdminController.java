@@ -2,13 +2,11 @@ package com.mlxc.controller;
 
 import com.mlxc.entity.Activity;
 import com.mlxc.entity.Commodity;
+import com.mlxc.entity.ShoppingCartItem;
 import com.mlxc.entity.User;
 import com.mlxc.entityrelation.UserActivity;
 import com.mlxc.entityrelation.UserCommodity;
-import com.mlxc.parammodel.LoginModel;
-import com.mlxc.parammodel.RegisterModel;
-import com.mlxc.parammodel.UpdateInfoModel;
-import com.mlxc.parammodel.UpdatePasswordModel;
+import com.mlxc.parammodel.*;
 import com.mlxc.service.ActivityService;
 import com.mlxc.service.CommodityService;
 import com.mlxc.service.UserService;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.soap.Addressing;
 import java.util.List;
 
 @RestController
@@ -200,6 +199,128 @@ public class UserAdminController {
     }
 
 
+    @GetMapping("/get-shop-cart")
+    public ResultModel getShopCart() {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户未登录");
+
+            return resultModel;
+        }
+
+        List<ShoppingCartItem> shoppingCartItems = userService.getShopCart(user.getUserId());
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("获取成功");
+
+        resultModel.setData(shoppingCartItems);
+
+        return resultModel;
+    }
+
+    @PostMapping("/add-shop-cart")
+    public ResultModel addShopCart(AddShopCartModel addShopCartModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户未登录");
+
+            return resultModel;
+        }
+
+        Commodity commodity = commodityService.getCommodityById(addShopCartModel.getCommodityId());
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+
+        shoppingCartItem.setCommodityId(commodity.getCommodityId());
+        shoppingCartItem.setCommodityName(commodity.getCommodityName());
+        shoppingCartItem.setCount(addShopCartModel.getNum());
+        shoppingCartItem.setPrice(commodity.getPrice());
+        shoppingCartItem.setUserId(user.getUserId());
+        shoppingCartItem.setImageURL(commodity.getImageURL());
+
+        userService.addShopCart(shoppingCartItem);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("添加成功");
+
+        return resultModel;
+    }
+
+    @PostMapping("/remove-shop-cart")
+    public ResultModel removeShopCart(long cartId) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户未登录");
+
+            return resultModel;
+        }
+
+        userService.removeShopCart(cartId);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+
+        return resultModel;
+    }
+
+
+    @PostMapping("/buy-commodities")
+    public ResultModel buyCommodities(BuyCommoditiesModel buyCommoditiesModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if(user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+
+            return resultModel;
+        }
+
+        List<UserCommodity> userCommodityList = buyCommoditiesModel.getUserCommodityList();
+        for (UserCommodity userCommodity : userCommodityList) {
+            userCommodity.setUserId(user.getUserId());
+        }
+
+        double totalPrice = 0;
+        for (UserCommodity userCommodity : userCommodityList) {
+            Commodity commodity = commodityService.getCommodityById(userCommodity.getCommodityId());
+
+            if(userCommodity.getNum() > commodity.getRest()) {
+                resultModel.setErrcode(0);
+                resultModel.setErrmsg("该商品数量不足，购买失败");
+
+                return resultModel;
+            }
+
+            double price = commodity.getPrice()*userCommodity.getNum();
+            totalPrice += price;
+        }
+
+        if(totalPrice > user.getBalance()) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户余额不足");
+
+            return resultModel;
+        }
+
+
+        userService.buyCommodities(userCommodityList, totalPrice);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("购买成功");
+
+        return resultModel;
+    }
+
+
     @PostMapping("/buy-commodity")
     public ResultModel buyCommodity(UserCommodity userCommodity) {
         ResultModel resultModel = new ResultModel();
@@ -211,6 +332,8 @@ public class UserAdminController {
 
             return resultModel;
         }
+
+        userCommodity.setUserId(user.getUserId());
 
         Commodity commodity = commodityService.getCommodityById(userCommodity.getCommodityId());
         if(userCommodity.getNum() > commodity.getRest()) {
@@ -272,7 +395,7 @@ public class UserAdminController {
         }
 
         if(user instanceof User) {
-            return (User) user;
+            return userService.findUserById(((User) user).getUserId());
         }
 
         return null;
