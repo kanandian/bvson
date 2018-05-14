@@ -8,9 +8,12 @@ public class Activity {
 
     private long activityId;
     private String activityName;
+    private String imageURL;
     private String des;
+    private long startTime;
     private int numLimit;
     private int currentNum;
+    private long createTime;
 
     public Activity() {
 
@@ -32,6 +35,14 @@ public class Activity {
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getDes() {
@@ -56,5 +67,21 @@ public class Activity {
 
     public void setCurrentNum(int currentNum) {
         this.currentNum = currentNum;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 }

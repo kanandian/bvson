@@ -1,0 +1,2 @@
+footerPosition();
+$(window).resize(footerPosition);

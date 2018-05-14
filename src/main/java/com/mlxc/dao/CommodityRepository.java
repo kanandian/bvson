@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CommodityRepository extends JpaRepository<Commodity, Long> {
 
-//    public List<Commodity> findByUserId(Long userid);
+    public List<Commodity> findByUserid(Long userid);
 
 
 }

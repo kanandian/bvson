@@ -1,12 +1,15 @@
 package com.mlxc.controller;
 
+import com.mlxc.entity.Activity;
 import com.mlxc.entity.Commodity;
 import com.mlxc.entity.User;
+import com.mlxc.service.ActivityService;
 import com.mlxc.service.CommodityService;
 import com.mlxc.utils.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +19,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -23,6 +28,9 @@ public class FormController {
 
     @Autowired
     private CommodityService commodityService;
+
+    @Autowired
+    private ActivityService activityService;
 
     @Autowired
     private HttpSession session;
@@ -52,6 +60,47 @@ public class FormController {
 
 
         commodityService.addCommodity(commodity);
+
+        return "personal-center";
+    }
+
+    @PostMapping("/save-activity")
+    public String addActivity(HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) {
+        ResultModel resultModel = new ResultModel();
+
+        String activityName = request.getParameter("activityname");
+        int activitylimit = Integer.parseInt(request.getParameter("activitylimit"));
+        String activityDate = request.getParameter("activitydate");
+        String activityTime = request.getParameter("activitytime");
+        String des = request.getParameter("des");
+        String imageURL = null;
+
+        String timeStr = activityDate+" "+activityTime;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
+        Date time = null;
+        try {
+            time = sdf.parse(timeStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            imageURL = uploadImage(request, multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Activity activity = new Activity();
+        activity.setActivityName(activityName);
+        activity.setNumLimit(activitylimit);
+        activity.setDes(des);
+        activity.setImageURL(imageURL);
+        activity.setStartTime(time.getTime());
+        activity.setCreateTime(new Date().getTime());
+
+        activityService.addActivity(activity);
+
 
         return "personal-center";
     }

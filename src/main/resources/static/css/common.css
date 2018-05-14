@@ -1,8 +1,8 @@
 .bottom {
-    position: fixed;
-    bottom: 36px;
-    left: 0px;
-    right: 0px;
+    /*position: fixed;*/
+    /*bottom: 36px;*/
+    /*left: 0px;*/
+    /*right: 0px;*/
 }
 
 .mbody {
@@ -16,3 +16,5 @@
     width: 0px;
     height: 0px;
 }
+
+.fixed-bottom{position:fixed;bottom:0;left:0;width:100%;}

@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void buyCommodities(List<UserCommodity> userCommodityList, double totalPrice) {
         for (UserCommodity userCommodity : userCommodityList) {
             Commodity commodity = commodityRepository.findOne(userCommodity.getCommodityId());
@@ -167,6 +168,16 @@ public class UserServiceImpl implements UserService {
     public List<ShoppingCartItem> getShopCart(long userId) {
         List<ShoppingCartItem> shoppingCartItems = shopCartRepository.findByUserId(userId);
         return shoppingCartItems;
+    }
+
+    @Override
+    public UserActivity getUserActivityById(long id) {
+        return userActivityRepository.findOne(id);
+    }
+
+    @Override
+    public void updateUserActivity(UserActivity userActivity) {
+        userActivityRepository.save(userActivity);
     }
 
 

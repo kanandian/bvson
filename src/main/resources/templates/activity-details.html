@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>活动详情</title>
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <link rel="stylesheet" href="css/activity-details.css" />
+    <link rel="stylesheet" href="css/common.css" />
+</head>
+<body>
+<div class="header"></div>
+
+<div class="mbody">
+    <div class="activity-name" id="activity_name"></div>
+    <div class="activity-time">发布时间：<span id="activity_time"></span></div>
+
+    <hr />
+
+    <div class="activity-img">
+        <img id="img_activity" width="320px" height="180px"/>
+
+    </div>
+    <div class="activity-des" id="activity_des">
+    </div>
+
+    <div class="person-count">
+        <span>参加人数：</span>
+        <span id="current_num"></span>
+        <span>人 / 限制：</span>
+        <span id="limit_num"></span>
+        <span>人</span>
+    </div>
+
+    <div class="start-time">
+        <span>活动时间：</span>
+        <span id="start_time"></span>
+    </div>
+
+    <div class="layui-btn layui-btn-normal" style="margin: 32px auto;" id="btn_attend_activity">参加活动</div>
+</div>
+
+<!--<div style="height: 110px;"></div>-->
+<div class="footer"></div>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script type="text/javascript" src="js/activity-details.js"></script>
+</body>
+</html>

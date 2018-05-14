@@ -37,6 +37,21 @@ public class ActivityController {
         return resultModel;
     }
 
+    @GetMapping("/get-activity-info")
+    public ResultModel getActivityInfo(long activityId) {
+        ResultModel resultModel = new ResultModel();
+
+
+        Activity activity = activityService.getActivityById(activityId);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+        resultModel.setData(activity);
+
+
+        return resultModel;
+    }
+
     @GetMapping("/test")
     public String test() {
         return "wohenshaui";

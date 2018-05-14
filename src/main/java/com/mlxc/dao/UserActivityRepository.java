@@ -8,5 +8,6 @@ import java.util.List;
 public interface UserActivityRepository extends JpaRepository<UserActivity, Long> {
 
     public List<UserActivity> findByUserId(Long userId);
+    public List<UserActivity> findByActivityId(Long activityId);
 
 }

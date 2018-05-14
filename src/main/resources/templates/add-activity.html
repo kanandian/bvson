@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="layui/css/layui.css" />
     <link rel="stylesheet" href="css/buy-bussiness.css" />
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/add-activity.css" />
 
     <style>
         .layui-form-label {
@@ -18,11 +19,11 @@
 <div class="header"></div>
 
 <div class="mbody">
-    <form class="layui-form" method="post" action="/add-commodity" enctype="multipart/form-data">
+    <form class="layui-form" method="post" action="/save-activity" enctype="multipart/form-data">
         <div class="layui-form-item">
-            <label class="layui-form-label">商品名称</label>
+            <label class="layui-form-label">活动名称</label>
             <div class="layui-input-block">
-                <input type="text" name="bussinessname" required  lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+                <input type="text" name="activityname" required  lay-verify="required" placeholder="请输入活动名称" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -32,15 +33,17 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">商品价格</label>
+            <label class="layui-form-label">活动时间</label>
             <div class="layui-input-block">
-                <input type="text" name="bussinessprice" required  lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+                <!--<input type="text" name="activityname" required  lay-verify="required" placeholder="请输入活动名称" autocomplete="off" class="layui-input">-->
+                <input type="date" id="date" class="activity-time" name="activitydate" />
+                <input type="time" id="time" class="activity-time" name="activitytime" />
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">商品总量</label>
+            <label class="layui-form-label">活动人数</label>
             <div class="layui-input-block">
-                <input type="text" name="bussinesscount" required  lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+                <input type="text" name="activitylimit" required  lay-verify="required" placeholder="请输入活动人数" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -63,6 +66,7 @@
 <script type="text/javascript" src="layui/layui.all.js"></script>
 <script type="text/javascript" src="js/buy-bussiness.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
 
 <script>
     //Demo
@@ -75,6 +79,7 @@
             return false;
         });
     });
+    // $("#date").datetimepicker();
 </script>
 </body>
 </html>

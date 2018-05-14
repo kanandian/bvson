@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>参加活动</title>
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/attend-activity.css" />
+    <link rel="stylesheet" href="css/activity-details.css" />
+
+    <style>
+        .layui-form-label {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header"></div>
+
+<div class="mbody">
+    <div class="activity-name" id="activity_name"></div>
+    <div class="activity-time">发布时间：<span id="activity_time"></span></div>
+
+    <hr />
+
+    <div class="activity-img">
+        <img id="img_activity" width="320px" height="180px"/>
+
+    </div>
+    <div class="activity-des" id="activity_des">
+    </div>
+
+    <!--<div class="person-count">-->
+        <!--<span>参加人数：</span>-->
+        <!--<span id="current_num"></span>-->
+        <!--<span>人 / 限制：</span>-->
+        <!--<span id="limit_num"></span>-->
+        <!--<span>人</span>-->
+    <!--</div>-->
+
+    <div class="start-time">
+        <span>活动时间：</span>
+        <span id="start_time"></span>
+    </div>
+
+
+
+    <form class="layui-form" action="" style="margin-top: 24px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input id="user_name" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-block">
+                <input id="mobile" type="number" name="title" required  lay-verify="required" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </form>
+
+    <div class="layui-form-item">
+        <!--<label class="layui-form-label"></label>-->
+        <div class="layui-input-block btn-admin" style="display: inline-block;margin-left: 0px;">
+            <div id="btn_update" class="layui-btn layui-btn-lg layui-btn-normal">修改</div>
+        </div>
+        <label class="layui-form-label btn-admin"></label>
+        <!--<div class="layui-input-block" style="display: inline-block;">-->
+        <!--<div id="btn_register" class="layui-btn layui-btn-lg layui-btn-normal">注册</div>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<div class="footer bottom"></div>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="layui/layui.all.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/attend-info.js"></script>
+<body>
+
+</body>
+</html>

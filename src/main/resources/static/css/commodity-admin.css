@@ -1,0 +1,12 @@
+.commodity-item div{
+    float: left;
+}
+
+.commodity-item .clr {
+    float: none;
+}
+
+.commodity-item {
+    height: 72px;
+    line-height: 72px;
+}

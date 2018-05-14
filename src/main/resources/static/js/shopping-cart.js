@@ -64,7 +64,7 @@ var bindAll = function () {
             var url = '/buy-commodities'
             $.post(url, data, function (res) {
                 if (res.errcode == 1) {
-                    alert('成功')
+                    window.location.href = '/payment'
                 } else {
                     alert(res.errmsg)
                 }

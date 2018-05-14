@@ -1,7 +1,9 @@
 package com.mlxc.service.impl;
 
 import com.mlxc.dao.ActivityRepository;
+import com.mlxc.dao.UserActivityRepository;
 import com.mlxc.entity.Activity;
+import com.mlxc.entityrelation.UserActivity;
 import com.mlxc.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,9 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ActivityRepository activityRepository;
+
+    @Autowired
+    private UserActivityRepository userActivityRepository;
 
     @Override
     @Transactional
@@ -32,6 +37,17 @@ public class ActivityServiceImpl implements ActivityService {
     @Transactional
     public void addActivity(Activity activity) {
         activityRepository.save(activity);
+    }
+
+    @Override
+    @Transactional
+    public List<UserActivity> getUserActivitiesByActivityId(long activityId) {
+        return userActivityRepository.findByActivityId(activityId);
+    }
+
+    @Override
+    public List<UserActivity> getUserActivitiesByUserId(long userId) {
+        return userActivityRepository.findByUserId(userId);
     }
 
     public ActivityRepository getActivityRepository() {

@@ -57,4 +57,40 @@ public class EntryController {
     public String shoppingCart() {
         return "shopping-cart";
     }
+
+    @GetMapping("/attend-activity")
+    public String attendActivity() {
+        return "attend-activity";
+    }
+
+    @GetMapping("/add-activity")
+    public String addActivity() {
+        return "add-activity";
+    }
+
+    @GetMapping("/activity-details")
+    public String activityDetails() {
+        return "activity-details";
+    }
+
+    @GetMapping("/commodity-admin")
+    public String commodityAdmin() {
+        return "commodity-admin";
+    }
+
+    @GetMapping("/payment")
+    public String payment() {
+        return "payment";
+    }
+
+    @GetMapping("/my-activity")
+    public String myActivity() {
+        return "my-activity";
+    }
+
+    @GetMapping("/attend-info")
+    public String attendInfo() {
+        return "attend-info";
+    }
+
 }

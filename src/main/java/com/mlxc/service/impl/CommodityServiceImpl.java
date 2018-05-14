@@ -34,6 +34,11 @@ public class CommodityServiceImpl implements CommodityService {
         commodityRepository.save(commodity);
     }
 
+    @Override
+    public List<Commodity> getCommoditiesByUserId(long userId) {
+        return commodityRepository.findByUserid(userId);
+    }
+
     public CommodityRepository getCommodityRepository() {
         return commodityRepository;
     }

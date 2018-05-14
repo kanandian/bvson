@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>个人中心</title>
     <link rel="stylesheet" href="layui/css/layui.css" />
-    <link rel="stylesheet" href="css/personal-center.css" />
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/personal-center.css" />
+    <link rel="stylesheet" href="css/attend-activity.css" />
 
     <style>
         .layui-form-label {
@@ -24,8 +25,9 @@
         <ul class="layui-tab-title">
             <li class="layui-this">个人信息</li>
             <li>修改密码</li>
-            <li>购物车</li>
-            <li>参加活动</li>
+            <li>我的活动</li>
+            <li id="shop_cart">购物车</li>
+            <li id="attend_activity">参加活动</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
@@ -82,9 +84,13 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
-            <div class="layui-tab-item">内容5</div>
+            <div class="layui-tab-item">
+                <div class="mbody" id="activity_content" style="text-align: left;width: 60%;">
+
+                </div>
+            </div>
+            <!--<div class="layui-tab-item">内容4</div>-->
+            <!--<div class="layui-tab-item">内容5</div>-->
         </div>
     </div>
 
@@ -94,8 +100,10 @@
 
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="layui/layui.all.js"></script>
-<script type="text/javascript" src="js/personal-center.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/personal-center.js"></script>
+<script type="text/javascript" src="js/my-activity.js"></script>
+
 
 <script>
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作

@@ -1,0 +1,16 @@
+.activity-name {
+    display: inline-block;
+    color: #333;
+}
+
+.create-time {
+    display: inline-block;
+    float: right;
+    color: #888888;
+    font-size: 12px;
+}
+
+.activity-item {
+    padding: 12px;
+    cursor: pointer;
+}

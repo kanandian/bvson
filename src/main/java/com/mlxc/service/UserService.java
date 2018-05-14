@@ -33,4 +33,8 @@ public interface UserService {
 
     public List<ShoppingCartItem> getShopCart(long userId);
 
+    public UserActivity getUserActivityById(long id);
+
+    public void updateUserActivity(UserActivity userActivity);
+
 }

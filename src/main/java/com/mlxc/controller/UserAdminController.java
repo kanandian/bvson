@@ -167,12 +167,52 @@ public class UserAdminController {
             return resultModel;
         }
 
-        userService.signUpActivity(new UserActivity(user.getUserId(), activityId));
+        List<Activity> activityList = userService.getAttendedActivities(user.getUserId());
+
+        for (Activity activity1 : activityList) {
+            if (activity1.getActivityId() == activityId) {
+                resultModel.setErrcode(0);
+                resultModel.setErrmsg("您已报名参加过该活动");
+
+                return resultModel;
+            }
+        }
+
+        userService.signUpActivity(new UserActivity(user.getUserId(), activityId, activity.getImageURL(), activity.getActivityName(), user.getUserName(), user.getPhoneNumber(), activity.getCreateTime(), activity.getStartTime(), activity.getDes()));
 
         resultModel.setErrcode(1);
         resultModel.setErrmsg("报名成功");
 
         return resultModel;
+    }
+
+
+    @PostMapping("/update-useractivity-info")
+    public ResultModel updateUserActivityInfo(UpdateUserActivityInfoModel updateUserActivityInfoModel) {
+        ResultModel resultModel = new ResultModel();
+
+        UserActivity userActivity = userService.getUserActivityById(updateUserActivityInfoModel.getId());
+        userActivity.setUserName(updateUserActivityInfoModel.getUserName());
+        userActivity.setMobile(updateUserActivityInfoModel.getMobile());
+        userService.updateUserActivity(userActivity);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("修改成功");
+
+        return  resultModel;
+    }
+
+    @GetMapping("/get-useractivity-info")
+    public ResultModel getUserActivityInfo(long id) {
+        ResultModel resultModel = new ResultModel();
+
+        UserActivity userActivity = userService.getUserActivityById(id);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("获取成功");
+        resultModel.setData(userActivity);
+
+        return  resultModel;
     }
 
     @GetMapping("/get-attended-activities")
@@ -189,7 +229,7 @@ public class UserAdminController {
 
         long userId = user.getUserId();
 
-        List<Activity> activityList = userService.getAttendedActivities(userId);
+        List<UserActivity> activityList = activityService.getUserActivitiesByUserId(user.getUserId());
 
         resultModel.setErrcode(1);
         resultModel.setErrmsg("获取成功");
@@ -287,6 +327,56 @@ public class UserAdminController {
         List<UserCommodity> userCommodityList = buyCommoditiesModel.getUserCommodityList();
         for (UserCommodity userCommodity : userCommodityList) {
             userCommodity.setUserId(user.getUserId());
+
+            Commodity commodity = commodityService.getCommodityById(userCommodity.getCommodityId());
+            userCommodity.setCommodityName(commodity.getCommodityName());
+            userCommodity.setPrice(commodity.getPrice());
+            userCommodity.setImageURL(commodity.getImageURL());
+        }
+
+        session.setAttribute("userCommodityList", userCommodityList);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+
+        return resultModel;
+    }
+
+    @GetMapping("/get-payment")
+    public ResultModel getPayment() {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if(user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+
+            return resultModel;
+        }
+
+        List<UserCommodity> userCommodityList = (List<UserCommodity>) session.getAttribute("userCommodityList");
+
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+        resultModel.setData(userCommodityList);
+
+        return resultModel;
+    }
+
+    @PostMapping("/payment")
+    public ResultModel payment(PaymentModel paymentModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+
+        List<UserCommodity> userCommodityList = (List<UserCommodity>) session.getAttribute("userCommodityList");
+
+        for (UserCommodity userCommodity : userCommodityList) {
+            userCommodity.setUserName(paymentModel.getUserName());
+            userCommodity.setMobile(paymentModel.getMobile());
+            userCommodity.setDes(paymentModel.getDes());
+            userCommodity.setAddress(paymentModel.getAddress());
         }
 
         double totalPrice = 0;
@@ -319,6 +409,7 @@ public class UserAdminController {
 
         return resultModel;
     }
+
 
 
     @PostMapping("/buy-commodity")

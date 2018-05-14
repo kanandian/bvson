@@ -8,6 +8,17 @@ var bindAll = function () {
     $('#btn_update_password').on('click', function () {
         updateUserPassword()
     })
+
+    $('#shop_cart').on('click', function () {
+        window.location.href='/shopping-cart'
+    })
+    $('#attend_activity').on('click', function () {
+        window.location.href='/attend-activity'
+    })
+
+    $('#my_activity').on('click', function () {
+        window.location.href = '/my-activity'
+    })
 }
 
 var queryUserInfo = function () {

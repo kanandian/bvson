@@ -47,6 +47,32 @@ public class CommodityController {
         return resultModel;
     }
 
+    @GetMapping("/get-commodities-bussiness")
+    public ResultModel getCommoditiesByBussiness() {
+        ResultModel resultModel = new ResultModel();
+
+
+        User user = getCurrentUser();
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+            return resultModel;
+        }
+        if (user.getUserType() == 0) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前账户类型为普通用户");
+            return resultModel;
+        }
+
+        List<Commodity> commodityList = commodityService.getCommoditiesByUserId(user.getUserId());
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+        resultModel.setData(commodityList);
+
+        return resultModel;
+    }
+
     @GetMapping("/commodity-info")
     public ResultModel getCommodityInfo(long commodityId) {
         ResultModel resultModel = new ResultModel();
