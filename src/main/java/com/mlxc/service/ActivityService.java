@@ -14,4 +14,6 @@ public interface ActivityService {
     public List<UserActivity> getUserActivitiesByActivityId(long activityId);
     public List<UserActivity> getUserActivitiesByUserId(long userId);
 
+    public void removeActivity(long activityId);
+
 }

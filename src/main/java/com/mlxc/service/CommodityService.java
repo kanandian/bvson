@@ -10,6 +10,8 @@ public interface CommodityService {
     public Commodity getCommodityById(long commodityId);
     public void addCommodity(Commodity commodity);
 
+    public void removeCommodity(long commodityId);
+
     public List<Commodity> getCommoditiesByUserId(long userId);
 
 

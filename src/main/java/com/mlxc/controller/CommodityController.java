@@ -47,6 +47,18 @@ public class CommodityController {
         return resultModel;
     }
 
+    @PostMapping("/remove-commodity")
+    public ResultModel removeCommodity(long commodityId) {
+        ResultModel resultModel = new ResultModel();
+
+        commodityService.removeCommodity(commodityId);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("删除成功");
+
+        return resultModel;
+    }
+
     @GetMapping("/get-commodities-bussiness")
     public ResultModel getCommoditiesByBussiness() {
         ResultModel resultModel = new ResultModel();
@@ -64,7 +76,12 @@ public class CommodityController {
             return resultModel;
         }
 
-        List<Commodity> commodityList = commodityService.getCommoditiesByUserId(user.getUserId());
+        List<Commodity> commodityList;
+        if (user.getUserType() == 2) {
+            commodityList = commodityService.getCommodities();
+        } else {
+            commodityList = commodityService.getCommoditiesByUserId(user.getUserId());
+        }
 
         resultModel.setErrcode(1);
         resultModel.setErrmsg("成功");

@@ -39,6 +39,8 @@ public class FormController {
     public String addCommodity(HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) {
         ResultModel resultModel = new ResultModel();
 
+        User user = getCurrentUser();
+
         String bussinessName = request.getParameter("bussinessname");
         double bussinessPrice = Double.parseDouble(request.getParameter("bussinessprice"));
         int count = Integer.parseInt(request.getParameter("bussinesscount"));
@@ -57,6 +59,7 @@ public class FormController {
         commodity.setRest(count);
         commodity.setDes(des);
         commodity.setImageURL(imageURL);
+        commodity.setUserid(user.getUserId());
 
 
         commodityService.addCommodity(commodity);

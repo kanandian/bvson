@@ -93,4 +93,9 @@ public class EntryController {
         return "attend-info";
     }
 
+    @GetMapping("/activity-admin")
+    public String activityAdmin() {
+        return "activity-admin";
+    }
+
 }

@@ -1,4 +1,5 @@
 .commodity-item div{
+    width: 25%;
     float: left;
 }
 
@@ -9,4 +10,8 @@
 .commodity-item {
     height: 72px;
     line-height: 72px;
+}
+
+.commodity-item .commodity-price {
+    color: #ff2832;
 }

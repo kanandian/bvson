@@ -50,6 +50,11 @@ public class ActivityServiceImpl implements ActivityService {
         return userActivityRepository.findByUserId(userId);
     }
 
+    @Override
+    public void removeActivity(long activityId) {
+        activityRepository.delete(activityId);
+    }
+
     public ActivityRepository getActivityRepository() {
         return activityRepository;
     }

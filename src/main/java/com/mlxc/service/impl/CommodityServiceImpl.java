@@ -35,6 +35,11 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
+    public void removeCommodity(long commodityId) {
+        commodityRepository.delete(commodityId);
+    }
+
+    @Override
     public List<Commodity> getCommoditiesByUserId(long userId) {
         return commodityRepository.findByUserid(userId);
     }
