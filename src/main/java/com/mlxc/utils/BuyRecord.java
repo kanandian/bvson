@@ -2,14 +2,24 @@ package com.mlxc.utils;
 
 public class BuyRecord {
 
+    private long id;
     private String commodityName;
     private double price;
     private int rest;
     private String imageURL;
     private String des;
     private int num;
+    private int orderStatis;
 
     public BuyRecord() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCommodityName() {
@@ -58,5 +68,13 @@ public class BuyRecord {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public int getOrderStatis() {
+        return orderStatis;
+    }
+
+    public void setOrderStatis(int orderStatis) {
+        this.orderStatis = orderStatis;
     }
 }

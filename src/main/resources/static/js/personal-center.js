@@ -1,4 +1,5 @@
 var $item_content = $('#item_content')
+var $commodity_content = $('#commodity_content')
 
 var bindAll = function () {
     queryUserInfo()
@@ -21,6 +22,30 @@ var bindAll = function () {
     $('#my_activity').on('click', function () {
         window.location.href = '/my-activity'
     })
+
+    $('#buy_records').on('click', function () {
+        queryBuyRecords()
+
+        // $('.btn-receipt').each(function () {
+        //     var status = $(this).attr('status')
+        //     if (status == 1) {
+                $(this).show()
+                // $(this).css('display', 'inline-block')
+            // }
+        // })
+    })
+
+    // $('body').on('click', '.status-admin', function () {
+    //     var status = $(this).attr('status')
+    //
+    //     if (status == 0) {
+    //         $(this).html('已下单')
+    //     } else if (status == 1) {
+    //         $(this).html('正在配送')
+    //     } else if (status == 2) {
+    //         $(this).html('已完成')
+    //     }
+    // })
 }
 
 var queryUserInfo = function () {
@@ -45,29 +70,48 @@ var queryUserInfo = function () {
     })
 }
 
+var queryBuyRecords = function () {
+    var url = '/buy-records'
+
+    $.get(url, function (res) {
+        if (res.errcode == 1) {
+            // $commodity_content.clear()
+            var data = res.data
+            for (var i=0;i<data.length;i++) {
+                $commodity_content.append(createCommodityItem(data[i]))
+            }
+        } else {
+            alert(res.errmsg)
+        }
+    })
+}
+
 var queryBussiness = function () {
 
 }
 
-var createItem = function (data) {
+var createCommodityItem = function (data) {
     var tmp = '<div class="shop-cart-item" commodity_id="'+data.commodityId+'">\n' +
-        '        <div class="div-check">\n' +
-        '            <input type="checkbox" class="check-item" />\n' +
-        '        </div>\n' +
         '        <div class="div-img">\n' +
         '            <img class="cart-commodity-img" src="'+data.imageURL+'" width="88px" height="80px" />\n' +
         '        </div>\n' +
         '        <div class="cart-commodity-name">'+data.commodityName+'</div>\n' +
-        '        <div class="cart-commodity-price"><span>￥</span>'+data.price+'</div>\n' +
+        '        <div class="cart-commodity-price" style="margin-left: -54px;"><span>￥</span>'+data.price+'</div>\n' +
         '        <div class="cart-commodity-count">\n' +
         '            <div class="position-count">\n' +
-        '                <input class="btn_num_admin btn_sub" type="button" value="-">\n' +
-        '                <input type="text" class="commodity-count" value="'+data.count+'" price="'+data.price+'" style="text-align: center;" />\n' +
-        '                <input class="btn_num_admin btn_add" type="button" value="+" />\n' +
+        // '                <input class="btn_num_admin btn_sub" type="button" value="-">\n' +
+        '                <span class="commodity-count" style="text-align: center;">'+data.num+'</span>\n' +
+        // '                <input class="btn_num_admin btn_add" type="button" value="+" />\n' +
         '            </div>\n' +
         '        </div>\n' +
-        '        <div class="cart-commodity-totalprice"><span>￥</span><span class="price-num">'+(data.count*data.price)+'</span></div>\n' +
-        '        <div class="cart-commodity-admin"><span class="btn-remove" cart_id="'+data.cartId+'">移除</span></div>\n'+
+        '        <div class="cart-commodity-totalprice"><span>￥</span><span class="price-num">'+(data.num*data.price)+'</span></div>\n' +
+        '        <div class="cart-commodity-admin" style="margin-left: 32px;"><span class="status-admin" ua-id="'+data.id+'" status="'+data.orderStatis+'">'+formatOrderStatus(data.orderStatis)+'</span>\n'
+
+    if (data.orderStatis == 1 || data.orderStatis == 2) {
+        tmp +=  '           <span style="display: inline-block;margin-left: 12px;" class="btn-receipt" status="'+data.orderStatis+'">'+formatAdminText(data.orderStatis)+'</span>\n'
+    }
+    tmp +=
+        '       </div>\n'+
         '        <div class="clr"></div>\n' +
         '    </div>'
 
@@ -91,6 +135,27 @@ var updateUserInfo = function () {
             alert(res.errmsg)
         }
     })
+}
+
+var formatOrderStatus = function (status) {
+    var orderStatus = ''
+    if (status == 0) {
+        orderStatus = '已下单'
+    } else if (status == 1) {
+        orderStatus = '正在配送'
+    } else if (status == 2) {
+        orderStatus = '已完成'
+    }
+
+    return orderStatus
+}
+
+var formatAdminText = function (status) {
+    if (status == 1) {
+        return '确认收货'
+    } else if (status == 2) {
+        return '添加评论'
+    }
 }
 
 var updateUserPassword = function () {

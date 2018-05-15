@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/buy-bussiness.css" />
     <link rel="stylesheet" href="css/personal-center.css" />
     <link rel="stylesheet" href="css/attend-activity.css" />
+    <link rel="stylesheet" href="css/shopping-cart.css" />
 
     <style>
         .layui-form-label {
@@ -16,6 +17,9 @@
         }
         .showif_bussiness {
             display: none;
+        }
+        .btn-receipt {
+
         }
     </style>
 </head>
@@ -29,6 +33,7 @@
         <ul class="layui-tab-title">
             <li class="layui-this">个人信息</li>
             <li>修改密码</li>
+            <li id="buy_records">我的订单</li>
             <li>我的活动</li>
             <li class="showif_bussiness">添加商品</li>
             <li class="showif_bussiness">商品订单</li>
@@ -88,6 +93,11 @@
                     <div class="layui-input-block">
                         <div id="btn_update_password" class="layui-btn layui-btn-lg layui-btn-normal">修改密码</div>
                     </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="mbody" id="commodity_content" style="text-align: left;">
+
                 </div>
             </div>
             <div class="layui-tab-item">

@@ -142,19 +142,22 @@ public class UserServiceImpl implements UserService {
 
             BuyRecord buyRecord = new BuyRecord();
 
+            buyRecord.setId(userCommodity.getId());
             buyRecord.setCommodityName(userCommodity.getCommodityName());
             buyRecord.setImageURL(userCommodity.getImageURL());
             buyRecord.setPrice(userCommodity.getPrice());
             buyRecord.setNum(userCommodity.getNum());
+            buyRecord.setOrderStatis(userCommodity.getOrderStatus());
 
 
-
+//            buyRecord.setId(userCommodity.getId());
 //            buyRecord.setCommodityName(commodity.getCommodityName());
 //            buyRecord.setImageURL(commodity.getImageURL());
 //            buyRecord.setRest(commodity.getRest());
 //            buyRecord.setPrice(commodity.getPrice());
 //            buyRecord.setNum(userCommodity.getNum());
 //            buyRecord.setDes(commodity.getDes());
+//            buyRecord.setOrderStatis(userCommodity.getOrderStatus());
 
             buyRecordList.add(buyRecord);
         }
