@@ -20,6 +20,8 @@ public class UserCommodity {
     private double price;
     private String imageURL;
     private String address;
+    private long holderId;
+    private int orderStatus;
 
     public UserCommodity() {
     }
@@ -118,5 +120,21 @@ public class UserCommodity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public long getHolderId() {
+        return holderId;
+    }
+
+    public void setHolderId(long holderId) {
+        this.holderId = holderId;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

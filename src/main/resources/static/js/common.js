@@ -1,3 +1,6 @@
+var $btn_login_header = $('#btn_login_header')
+var $btn_register_header = $('#btn_register_header')
+
 $(document).ready(function(){
     $(".header").load("common-header");
     $(".footer").load("common-footer");
@@ -5,7 +8,30 @@ $(document).ready(function(){
 
     footerPosition();
     $(window).resize(footerPosition);
+
+    queryUserInfoHeader()
+
+
 });
+
+var queryUserInfoHeader = function () {
+    var url = '/get-userinfo'
+
+    $.get(url, function (res) {
+        var data = res.data
+        if (res.errcode == 1) {
+            $('#btn_login_header').hide()
+            $('#btn_register_header').hide()
+
+
+            $('.ele_after_login').css('display', 'inline-block')
+            $('#header_user_info').css('display', 'block')
+            $('#header_user_name').html(data.userName)
+        } else {
+            // alert(res.errmsg)
+        }
+    })
+}
 
 function getUrlParam(name) {
     //构造一个含有目标参数的正则表达式对象

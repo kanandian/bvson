@@ -18,3 +18,26 @@
 }
 
 .fixed-bottom{position:fixed;bottom:0;left:0;width:100%;}
+
+.btn-admins {
+    /*text-align: right;*/
+    margin: 6px;
+    float: right;
+}
+
+.btn-status-admin {
+    background-image: linear-gradient(to right,#73a11c 0,#ffffff 100%);
+    width: 92px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 7px;
+    color: #ffffff;
+    font-size: 14px;
+
+}
+
+.ele_after_login {
+    display: none;
+}

@@ -37,4 +37,6 @@ public interface UserService {
 
     public void updateUserActivity(UserActivity userActivity);
 
+    public List<UserCommodity> getUserCommoditiesByHolderId(long holderId);
+
 }

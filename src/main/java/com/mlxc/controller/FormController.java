@@ -8,6 +8,7 @@ import com.mlxc.service.CommodityService;
 import com.mlxc.utils.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -106,6 +107,19 @@ public class FormController {
 
 
         return "personal-center";
+    }
+
+
+    @GetMapping("/logout")
+    public String logout() {
+        ResultModel resultModel = new ResultModel();
+
+        session.removeAttribute("user");
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("注销成功");
+
+        return "index";
     }
 
     private String uploadImage(HttpServletRequest request, MultipartFile multipartFile) throws IOException {

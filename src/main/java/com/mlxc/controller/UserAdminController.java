@@ -332,6 +332,7 @@ public class UserAdminController {
             userCommodity.setCommodityName(commodity.getCommodityName());
             userCommodity.setPrice(commodity.getPrice());
             userCommodity.setImageURL(commodity.getImageURL());
+            userCommodity.setHolderId(commodity.getUserid());
         }
 
         session.setAttribute("userCommodityList", userCommodityList);
@@ -448,6 +449,34 @@ public class UserAdminController {
         resultModel.setErrcode(1);
         resultModel.setErrmsg("购买成功");
 
+
+        return resultModel;
+    }
+
+    @GetMapping("/sold-records")
+    public ResultModel soldRecords() {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+
+        if(user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+
+            return resultModel;
+        }
+        if (user.getUserType() != 1) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("只有商家可以查看");
+
+            return resultModel;
+        }
+
+        List<UserCommodity> userCommodityList = userService.getUserCommoditiesByHolderId(user.getUserId());
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("获取成功");
+        resultModel.setData(userCommodityList);
 
         return resultModel;
     }

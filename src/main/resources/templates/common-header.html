@@ -7,23 +7,31 @@
     <link rel="stylesheet" href="//uploads.dahe.cn/lxx/mlxc/css/pintuer.css">
     <link rel="stylesheet" href="//uploads.dahe.cn/lxx/mlxc/css/css.css">
     <link rel="stylesheet" href="//uploads.dahe.cn/lxx/mlxc/css/zm-cg.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 <div class="banner">
+    <div class="btn-admins">
+        <a href="/login" class="btn-status-admin" id="btn_login_header">登录</a>
+        <a href="/register" class="btn-status-admin" id="btn_register_header">注册</a>
+        <div class="ele_after_login" style="text-align: right;" id="header_user_info"><span>Hi&nbsp;</span><span id="header_user_name"></span><span>，欢迎回来！</span></div><br/>
+        <a href="/personal-center" class="btn-status-admin ele_after_login" id="btn_personal_center_header">个人中心</a>
+        <a href="/logout" class="btn-status-admin ele_after_login" id="btn_logout">注销</a>
+    </div>
     <div class="container">
         <div class="line">
             <div class="x6">
                 <!--<div class="logo"><a href="//mlxc.dahe.cn/"><img class="img-responsive" src="//uploads.dahe.cn/lxx/mlxc/img/logo.png"/></a></div>-->
             </div>
             <div class="x6">
-                <div class="search">
-                    <form method="post">
-                        <div class="input-inline clearfix">
-                            <input type="text" class="input" id="keyword" name="keyword" size="20" placeholder="请输入关键字" />
-                            <input class="button" type="submit" value="搜索" />
-                        </div>
-                    </form>
-                </div>
+                <!--<div class="search">-->
+                    <!--<form method="post">-->
+                        <!--<div class="input-inline clearfix">-->
+                            <!--<input type="text" class="input" id="keyword" name="keyword" size="20" placeholder="请输入关键字" />-->
+                            <!--<input class="button" type="submit" value="搜索" />-->
+                        <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
             </div>
         </div>
     </div>

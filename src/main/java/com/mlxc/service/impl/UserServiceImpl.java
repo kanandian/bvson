@@ -138,15 +138,23 @@ public class UserServiceImpl implements UserService {
         List<BuyRecord> buyRecordList = new ArrayList<BuyRecord>();
 
         for(UserCommodity userCommodity : userCommodityList) {
-            Commodity commodity = commodityRepository.findOne(userCommodity.getCommodityId());
+//            Commodity commodity = commodityRepository.findOne(userCommodity.getCommodityId());
 
             BuyRecord buyRecord = new BuyRecord();
-            buyRecord.setCommodityName(commodity.getCommodityName());
-            buyRecord.setImageURL(commodity.getImageURL());
-            buyRecord.setRest(commodity.getRest());
-            buyRecord.setPrice(commodity.getPrice());
+
+            buyRecord.setCommodityName(userCommodity.getCommodityName());
+            buyRecord.setImageURL(userCommodity.getImageURL());
+            buyRecord.setPrice(userCommodity.getPrice());
             buyRecord.setNum(userCommodity.getNum());
-            buyRecord.setDes(commodity.getDes());
+
+
+
+//            buyRecord.setCommodityName(commodity.getCommodityName());
+//            buyRecord.setImageURL(commodity.getImageURL());
+//            buyRecord.setRest(commodity.getRest());
+//            buyRecord.setPrice(commodity.getPrice());
+//            buyRecord.setNum(userCommodity.getNum());
+//            buyRecord.setDes(commodity.getDes());
 
             buyRecordList.add(buyRecord);
         }
@@ -178,6 +186,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserActivity(UserActivity userActivity) {
         userActivityRepository.save(userActivity);
+    }
+
+    @Override
+    public List<UserCommodity> getUserCommoditiesByHolderId(long holderId) {
+        return userCommodityReposity.findByHolderId(holderId);
     }
 
 
