@@ -1,3 +1,7 @@
+.layui-card-header {
+    background-color: #f6f6f6;
+}
+
 .img-left {
     display: inline-block;
     margin-left: 160px;
@@ -40,4 +44,49 @@
 
 .admin-buttons {
     margin-top: 18px;
+}
+
+.comment-item {
+    width: 924px;
+    height: 154px;
+    position: relative;
+    left: 26px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.comment-user-name {
+    display: inline-block;
+    height: 126px;
+    line-height: 126px;
+    width: 100px;
+    text-align: center;
+    position: relative;
+    top: -78px;
+}
+
+.content-text {
+    font-size: 14px;
+    color: #3F3F3F;
+    word-wrap: break-word;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+}
+
+.div-content {
+    display: inline-block;
+    width: 820px;
+    height: inherit;
+    padding: 10px;
+}
+
+.content-time {
+    position: absolute;
+    bottom: 0px;
+    font-size: 12px;
+    color: #B0B0B0;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+}
+
+.comment-content {
+    max-height: 526px;
+    overflow: auto;
 }

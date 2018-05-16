@@ -411,6 +411,56 @@ public class UserAdminController {
         return resultModel;
     }
 
+    @PostMapping("/comfirm-receipt")
+    public ResultModel confirmReceipt(OrderStatusAdminModel orderStatusAdminModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if(user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+
+            return resultModel;
+        }
+
+        orderStatusAdminModel.setStatus(2);
+
+        userService.updateUserCommodityStatus(orderStatusAdminModel.getId(), orderStatusAdminModel.getStatus());
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+
+        return resultModel;
+    }
+
+    @PostMapping("/distribution")
+    public ResultModel distribution(OrderStatusAdminModel orderStatusAdminModel) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if(user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+
+            return resultModel;
+        }
+        if (user.getUserType() != 1) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("只有商家能发货");
+
+            return resultModel;
+        }
+
+        orderStatusAdminModel.setStatus(1);
+
+        userService.updateUserCommodityStatus(orderStatusAdminModel.getId(), orderStatusAdminModel.getStatus());
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+
+        return resultModel;
+    }
+
 
 
     @PostMapping("/buy-commodity")

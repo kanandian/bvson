@@ -1,10 +1,7 @@
 package com.mlxc.service.impl;
 
 import com.mlxc.dao.*;
-import com.mlxc.entity.Activity;
-import com.mlxc.entity.Commodity;
-import com.mlxc.entity.ShoppingCartItem;
-import com.mlxc.entity.User;
+import com.mlxc.entity.*;
 import com.mlxc.entityrelation.UserActivity;
 import com.mlxc.entityrelation.UserCommodity;
 import com.mlxc.service.UserService;
@@ -38,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ShopCartRepository shopCartRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
 
     @Override
@@ -148,6 +148,7 @@ public class UserServiceImpl implements UserService {
             buyRecord.setPrice(userCommodity.getPrice());
             buyRecord.setNum(userCommodity.getNum());
             buyRecord.setOrderStatis(userCommodity.getOrderStatus());
+            buyRecord.setCommodityId(userCommodity.getCommodityId());
 
 
 //            buyRecord.setId(userCommodity.getId());
@@ -194,6 +195,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserCommodity> getUserCommoditiesByHolderId(long holderId) {
         return userCommodityReposity.findByHolderId(holderId);
+    }
+
+    @Override
+    public void updateUserCommodityStatus(long id, int status) {
+        UserCommodity userCommodity = userCommodityReposity.findOne(id);
+        userCommodity.setOrderStatus(status);
+
+        userCommodityReposity.save(userCommodity);
+    }
+
+    @Override
+    public void addComent(Comment comment) {
+        commentRepository.save(comment);
     }
 
 

@@ -1,6 +1,7 @@
 package com.mlxc.service;
 
 import com.mlxc.entity.Activity;
+import com.mlxc.entity.Comment;
 import com.mlxc.entity.ShoppingCartItem;
 import com.mlxc.entity.User;
 import com.mlxc.entityrelation.UserActivity;
@@ -38,5 +39,9 @@ public interface UserService {
     public void updateUserActivity(UserActivity userActivity);
 
     public List<UserCommodity> getUserCommoditiesByHolderId(long holderId);
+
+    public void updateUserCommodityStatus(long id, int status);
+
+    public void addComent(Comment comment);
 
 }

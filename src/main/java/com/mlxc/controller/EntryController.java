@@ -98,4 +98,9 @@ public class EntryController {
         return "activity-admin";
     }
 
+    @GetMapping("/add-comment")
+    public String addComment() {
+        return "add-comment";
+    }
+
 }

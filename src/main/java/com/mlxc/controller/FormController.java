@@ -1,10 +1,12 @@
 package com.mlxc.controller;
 
 import com.mlxc.entity.Activity;
+import com.mlxc.entity.Comment;
 import com.mlxc.entity.Commodity;
 import com.mlxc.entity.User;
 import com.mlxc.service.ActivityService;
 import com.mlxc.service.CommodityService;
+import com.mlxc.service.UserService;
 import com.mlxc.utils.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,9 @@ import java.util.Date;
 
 @Controller
 public class FormController {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CommodityService commodityService;
@@ -64,6 +69,35 @@ public class FormController {
 
 
         commodityService.addCommodity(commodity);
+
+        return "personal-center";
+    }
+
+    @PostMapping("/add-comment")
+    public String addComment(HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) {
+        Comment comment = new Comment();
+
+        User user = getCurrentUser();
+        String content = request.getParameter("content");
+        long commodityId = Long.parseLong(request.getParameter("commodityId"));
+        String imageURL = null;
+
+        try {
+            imageURL = uploadImage(request, multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        comment.setCommentTime(new Date().getTime());
+        comment.setCommodityId(commodityId);
+        comment.setContent(content);
+        comment.setUserId(user.getUserId());
+        comment.setUserName(user.getUserName());
+        comment.setImageURL(imageURL);
+
+        userService.addComent(comment);
+
 
         return "personal-center";
     }

@@ -10,6 +10,7 @@ public class BuyRecord {
     private String des;
     private int num;
     private int orderStatis;
+    private long commodityId;
 
     public BuyRecord() {
     }
@@ -76,5 +77,13 @@ public class BuyRecord {
 
     public void setOrderStatis(int orderStatis) {
         this.orderStatis = orderStatis;
+    }
+
+    public long getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(long commodityId) {
+        this.commodityId = commodityId;
     }
 }

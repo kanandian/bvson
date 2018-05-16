@@ -1,7 +1,9 @@
 package com.mlxc.controller;
 
+import com.mlxc.entity.Comment;
 import com.mlxc.entity.Commodity;
 import com.mlxc.entity.User;
+import com.mlxc.service.CommentService;
 import com.mlxc.service.CommodityService;
 import com.mlxc.utils.ResultModel;
 import org.apache.commons.fileupload.FileItem;
@@ -29,6 +31,9 @@ public class CommodityController {
 
     @Autowired
     private CommodityService commodityService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private HttpSession session;
@@ -86,6 +91,19 @@ public class CommodityController {
         resultModel.setErrcode(1);
         resultModel.setErrmsg("成功");
         resultModel.setData(commodityList);
+
+        return resultModel;
+    }
+
+    @GetMapping("/get-comments")
+    public ResultModel getComments(long commodityId) {
+        ResultModel resultModel = new ResultModel();
+
+        List<Comment> commentList = commentService.getCommentsByCommodityId(commodityId);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+        resultModel.setData(commentList);
 
         return resultModel;
     }

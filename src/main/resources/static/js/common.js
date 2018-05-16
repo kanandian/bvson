@@ -54,7 +54,7 @@ function formatTime(timestamp) {
 
     nowMonth = doHandleMonth(nowMonth + 1);
     nowDate = doHandleMonth(nowDate);
-    return nowYear + "-" + nowMonth + "-" + nowDate;
+    return nowYear + "年" + nowMonth + "月" + nowDate;
 }
 
 function doHandleMonth(month) {
