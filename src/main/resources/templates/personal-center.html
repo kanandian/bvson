@@ -34,11 +34,13 @@
             <li class="layui-this">个人信息</li>
             <li>修改密码</li>
             <li id="buy_records">我的订单</li>
-            <li>我的活动</li>
+            <li class="showif_bussiness showif_user" style="display: none;">我的活动</li>
+            <li id="user_admin" class="showif_admin" style="display: none;">用户管理</li>
+            <li id="commodity_admin" class="showif_admin showif_bussiness" style="display: none;">商品管理</li>
             <li class="showif_bussiness" style="display: none;">添加商品</li>
             <li id="bussiness_order" class="showif_bussiness" style="display: none;">商品订单</li>
             <li id="shop_cart">购物车</li>
-            <li id="attend_activity">参加活动</li>
+            <li id="attend_activity" class="showif_bussiness showif_user" style="display: none;">参加活动</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
@@ -52,13 +54,13 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">电话号码</label>
                         <div class="layui-input-block">
-                            <input id="phone_number" type="tel" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input" maxlength="11">
+                            <input id="phone_number" type="tel" name="title" required  lay-verify="required" placeholder="请输入电话号码" autocomplete="off" class="layui-input" maxlength="11">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">电子邮箱</label>
                         <div class="layui-input-block">
-                            <input id="email" type="text" name="title" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                            <input id="email" type="text" name="title" required  lay-verify="required" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -102,6 +104,16 @@
             </div>
             <div class="layui-tab-item">
                 <div class="mbody" id="activity_content" style="text-align: left;width: 60%;">
+
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="mbody" id="user_admin_content" style="text-align: left;width: 60%;">
+
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="mbody" id="commodity_admin_content" style="text-align: left;">
 
                 </div>
             </div>

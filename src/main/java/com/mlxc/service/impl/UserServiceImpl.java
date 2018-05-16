@@ -53,6 +53,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findUserByUserType(int userType) {
+        return userRepository.findByUserType(userType);
+    }
+
+    @Override
+    public void removeUser(long userId) {
+        userRepository.delete(userId);
+    }
+
+    @Override
     @Transactional
     public User findUserByUserName(String userName) {
         User user = userRepository.findByUserName(userName);

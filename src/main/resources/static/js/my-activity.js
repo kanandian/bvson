@@ -9,6 +9,7 @@ var queryMyActivity = function () {
 
     $.get(url, function (res) {
         if (res.errcode == 1) {
+            $activity_content.children().remove()
             var data = res.data
 
             for (var i=0;i<data.length;i++) {

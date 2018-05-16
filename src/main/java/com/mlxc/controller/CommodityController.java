@@ -56,10 +56,42 @@ public class CommodityController {
     public ResultModel removeCommodity(long commodityId) {
         ResultModel resultModel = new ResultModel();
 
+        User user = getCurrentUser();
+        if (user.getUserType() == 0) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("普通用户无法下架商品");
+            return resultModel;
+        }
+
         commodityService.removeCommodity(commodityId);
 
         resultModel.setErrcode(1);
         resultModel.setErrmsg("删除成功");
+
+        return resultModel;
+    }
+
+    @GetMapping("/get-commodities-admin")
+    public ResultModel getCommoditiesAdmin() {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+            return resultModel;
+        }
+        List<Commodity> commodityList = null;
+        if (user.getUserType() == 2) {
+            commodityList = commodityService.getCommodities();
+        } else if (user.getUserType() == 1) {
+            commodityList = commodityService.getCommoditiesByUserId(user.getUserId());
+        }
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("获取成功");
+        resultModel.setData(commodityList);
+
 
         return resultModel;
     }

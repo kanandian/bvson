@@ -16,6 +16,10 @@ public interface UserService {
 
     public User findUserById(long id);
 
+    public List<User> findUserByUserType(int userType);
+
+    public void removeUser(long userId);
+
     public User findUserByUserName(String userName);
 
     public void signUpActivity(UserActivity userActivity);

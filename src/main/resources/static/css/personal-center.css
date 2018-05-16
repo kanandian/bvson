@@ -1,0 +1,17 @@
+.user-info-item div {
+    display: inline-block;
+    width: 40%;
+}
+
+.admin-user-name {
+    text-align: left;
+}
+
+.admin-btn-delete-user {
+    text-align: right;
+    cursor: pointer;
+}
+
+.btn-admin-delete-commodity {
+    cursor: pointer;
+}

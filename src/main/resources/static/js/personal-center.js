@@ -2,6 +2,11 @@ var $item_content = $('#item_content')
 var $commodity_content = $('#commodity_content')
 var $item_content = $('#item_content')
 
+
+var $commodity_admin_content = $('#commodity_admin_content')
+
+var $user_admin_content = $('#user_admin_content')
+
 var bindAll = function () {
     queryUserInfo()
 
@@ -82,6 +87,47 @@ var bindAll = function () {
         queryBussinessUserCommodity()
     })
 
+    $('#user_admin').on('click', function () {
+        queryUserAdmin()
+    })
+
+    $('#commodity_admin').on('click', function () {
+        queryCommodityAdmin()
+    })
+
+    $('body').on('click', '.admin-btn-delete-user', function () {
+        var url = '/remove-user'
+        var $btn = $(this)
+        var userId = $btn.attr('user_id')
+
+        var data = {}
+        data.userId = userId
+        $.post(url, data, function (res) {
+            if (res.errcode == 1) {
+                $btn.parent().remove()
+            } else {
+                alert(res.errmsg)
+            }
+        })
+    })
+
+    $('body').on('click', '.btn-admin-delete-commodity', function () {
+        var url = '/remove-commodity'
+
+        var $btn = $(this)
+        var commodityId = $btn.attr('commodity_id')
+        var data = {}
+        data.commodityId = commodityId
+
+        $.post(url, data, function (res) {
+            if (res.errcode == 1) {
+                $btn.parent().remove()
+            } else {
+                alert(res.errmsg)
+            }
+        })
+    })
+
 
     // $('body').on('click', '.status-admin', function () {
     //     var status = $(this).attr('status')
@@ -109,7 +155,9 @@ var queryUserInfo = function () {
             if (data.userType == 1) {
                 $('.showif_bussiness').show()
             } else if (data.userType == 2) {
-                // $('.')
+                $('.showif_admin').show()
+            } else if (data.userType == 0) {
+                $('.showif_user').show()
             }
 
         } else {
@@ -118,12 +166,53 @@ var queryUserInfo = function () {
     })
 }
 
+var queryCommodityAdmin = function () {
+    var url = '/get-commodities-admin'
+
+    $.get(url, function (res) {
+        if (res.errcode == 1) {
+            $commodity_admin_content.children().remove()
+            var data = res.data
+            for (var i=0;i<data.length;i++) {
+                $commodity_admin_content.append(createCommodityAdminItem(data[i]))
+            }
+        } else {
+            alert(res.errmsg)
+        }
+    })
+}
+
+var queryUserAdmin = function () {
+    var url = '/get-users-admin'
+
+    $.get(url, function (res) {
+        if (res.errcode == 1) {
+            $user_admin_content.children().remove()
+            var data = res.data
+            for (var i=0;i<data.length;i++) {
+                $user_admin_content.append(createUserInfoItem(data[i]))
+            }
+        } else {
+            alert(res.errmsg)
+        }
+    })
+}
+
+var createUserInfoItem = function (data) {
+    var tmp = '<div class="user-info-item">\n' +
+        '            <div class="admin-user-name">'+data.userName+'</div>\n' +
+        '            <div class="admin-btn-delete-user" user_id="'+data.userId+'">删除</div>\n' +
+        '      </div>'
+
+    return $(tmp)
+}
+
 var queryBuyRecords = function () {
     var url = '/buy-records'
 
     $.get(url, function (res) {
         if (res.errcode == 1) {
-            // $commodity_content.clear()
+            $commodity_content.children().remove()
             var data = res.data
             for (var i=0;i<data.length;i++) {
                 $commodity_content.append(createCommodityItem(data[i]))
@@ -147,6 +236,21 @@ var queryBussinessUserCommodity = function () {
             alert(res.errmsg)
         }
     })
+}
+
+var createCommodityAdminItem = function (data) {
+    var tmp = '<div class="shop-cart-item" commodity_id="'+data.commodityId+'">\n' +
+        '        <div class="div-img">\n' +
+        '            <img class="cart-commodity-img" src="'+data.imageURL+'" width="88px" height="80px" />\n' +
+        '        </div>\n' +
+        '        <div class="cart-commodity-name">'+data.commodityName+'</div>\n' +
+        '        <div class="cart-commodity-price"><span>￥</span>'+data.price+'</div>\n' +
+        '           <span style="display: inline-block;float:right;margin-right: 12px;" commodity_id="'+data.commodityId+'" class="btn-admin-delete-commodity" sid="'+data.id+'" status="'+data.orderStatis+'">删除</span>\n' +
+        '       </div>\n'+
+        '        <div class="clr"></div>\n' +
+        '    </div>'
+
+    return $(tmp)
 }
 
 var createCommodityItem = function (data) {

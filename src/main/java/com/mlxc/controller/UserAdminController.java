@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.Addressing;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -79,6 +80,28 @@ public class UserAdminController {
 
     }
 
+    @GetMapping("/get-users-admin")
+    public ResultModel getUsersAdmin() {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+
+        if (user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("用户未登录！");
+            return resultModel;
+        }
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("成功");
+        List<User> userList = new ArrayList<User>();
+        if (user.getUserType() == 2) {
+            userList = userService.findUserByUserType(1);
+        }
+        resultModel.setData(userList);
+
+        return resultModel;
+    }
+
     @PostMapping("/update_user_info")
     public ResultModel updateUserInfo(UpdateInfoModel updateInfoModel) {
         ResultModel resultModel = new ResultModel();
@@ -123,6 +146,24 @@ public class UserAdminController {
             resultModel.setErrmsg("原始密码输入不正确");
             return resultModel;
         }
+    }
+
+    @PostMapping("/remove-user")
+    public ResultModel removeUser(long userId) {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+        if (user.getUserType() != 2) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("只有管理员有权限删除用户");
+            return resultModel;
+        }
+
+        userService.removeUser(userId);
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("删除成功");
+        return resultModel;
     }
 
     @GetMapping("/get-userinfo")
