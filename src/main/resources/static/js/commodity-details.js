@@ -38,6 +38,29 @@ var bindAll = function () {
             }
         })
     })
+
+    $('#btn_buy').on('click', function () {
+        var count = $input_count.val()
+
+        var ids = []
+        var nums = []
+
+        ids.push(commodityId)
+        nums.push(count)
+
+        var data = {}
+        data.ids = ids.join(',')
+        data.nums = nums.join(',')
+
+        var url = '/buy-commodities'
+        $.post(url, data, function (res) {
+            if (res.errcode == 1) {
+                window.location.href = '/payment'
+            } else {
+                alert(res.errmsg)
+            }
+        })
+    })
 }
 
 var queryCommodityInfo = function () {
