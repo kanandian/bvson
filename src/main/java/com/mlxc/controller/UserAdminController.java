@@ -40,6 +40,14 @@ public class UserAdminController {
     @PostMapping("/register")
     public ResultModel register(RegisterModel registerModel) {
         User user = registerModel.createUser();
+        User oldUser = userService.findUserByUserName(user.getUserName());
+        if (oldUser != null) {
+            ResultModel resultModel = new ResultModel();
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("该用户名已经存在");
+            return resultModel;
+        }
+
         userService.addUser(user);
 
         ResultModel resultModel = new ResultModel();

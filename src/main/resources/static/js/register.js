@@ -20,6 +20,19 @@ function register() {
     var phone = $div_phone_number.val()
     var email = $div_email.val()
 
+    if (username.length < 4) {
+        alert('用户名长度限制为4-16位')
+        return
+    }
+    if (password.length < 5) {
+        alert('密码长度限制为5-24个字符')
+        return
+    }
+    if (phone.length != 11) {
+        alert('电话号码长度只能是11位')
+        return
+    }
+
     var usertype = $('input:radio:checked').val()
 
     if (password == cpassword) {
@@ -34,11 +47,13 @@ function register() {
         $.post(url, data, function (res) {
             if (res.errcode == 1) {
                 window.location.href = '/'
+            } else {
+                alert(res.errmsg)
             }
         })
     } else {
-        $.alert('两次密码输入不一致')
-        // alert('两次密码输入不一致')
+        // $.alert('两次密码输入不一致')
+        alert('两次密码输入不一致')
     }
 
 }

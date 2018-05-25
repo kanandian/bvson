@@ -18,3 +18,4 @@ spring:
     mode: LEGACYHTML5
     encoding: UTF-8
     content-type: text/html
+imagePath: file:/Users/macpro/IdeaProjects/bvson/images/

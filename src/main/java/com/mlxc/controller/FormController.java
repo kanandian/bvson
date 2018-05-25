@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -40,6 +43,9 @@ public class FormController {
 
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private ServletContext servletContext;
 
     @PostMapping("/add-commodity")
     public String addCommodity(HttpServletRequest request, @RequestParam("image") MultipartFile multipartFile) {
@@ -157,7 +163,7 @@ public class FormController {
     }
 
     private String uploadImage(HttpServletRequest request, MultipartFile multipartFile) throws IOException {
-        String imagePath = request.getServletContext().getRealPath("/bussinessimage");
+        String imagePath = "images";
         File uploadDir = new File(imagePath);
 
         if (!uploadDir.exists()) {
@@ -181,7 +187,7 @@ public class FormController {
 
             String serverName = request.getServerName();
             int port = request.getServerPort();
-            String imageURL = "http://"+serverName+":"+port+"/bussinessimage/"+imageName;
+            String imageURL = "/images/"+imageName;
 
             return imageURL;
         }
