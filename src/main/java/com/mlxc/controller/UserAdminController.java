@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.Addressing;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class UserAdminController {
@@ -597,6 +599,45 @@ public class UserAdminController {
         resultModel.setErrcode(1);
         resultModel.setErrmsg("获取成功");
         resultModel.setData(buyRecordList);
+
+        return resultModel;
+    }
+
+    @GetMapping("/sold-statistics")
+    public ResultModel soldStatistics() {
+        ResultModel resultModel = new ResultModel();
+
+        User user = getCurrentUser();
+
+        if(user == null) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("当前用户未登录");
+
+            return resultModel;
+        }
+        if (user.getUserType() != 1) {
+            resultModel.setErrcode(0);
+            resultModel.setErrmsg("只有商家可以获取");
+
+            return resultModel;
+        }
+
+        List<UserCommodity> userCommodityList = userService.getUserCommoditiesByHolderId(user.getUserId());
+
+        Map<String, Integer> statistics = new HashMap<String, Integer>();
+        for (UserCommodity userCommodity : userCommodityList) {
+            String commodityName = userCommodity.getCommodityName();
+            if (statistics.containsKey(commodityName)) {
+                int count = statistics.get(commodityName);
+                statistics.put(commodityName, count+1);
+            } else {
+                statistics.put(commodityName, 1);
+            }
+        }
+
+        resultModel.setErrcode(1);
+        resultModel.setErrmsg("获取成功");
+        resultModel.setData(statistics);
 
         return resultModel;
     }

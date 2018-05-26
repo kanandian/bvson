@@ -39,9 +39,11 @@
             <li id="commodity_admin" class="showif_admin showif_bussiness" style="display: none;">商品管理</li>
             <li class="showif_bussiness" style="display: none;">添加商品</li>
             <li id="bussiness_order" class="showif_bussiness" style="display: none;">商品订单</li>
+            <li class="showif_bussiness" id="statistic" style="display: none;">商品统计</li>
             <li id="shop_cart">购物车</li>
             <li id="attend_activity" class="showif_bussiness showif_user" style="display: none;">参加活动</li>
             <li id="add_activity" onclick="window.location.href='add-activity'" class="showif_admin" style="display: none;">添加活动</li>
+
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
@@ -109,11 +111,24 @@
                 </div>
             </div>
             <div class="layui-tab-item">
+                <div class="user-info-item" style="width: 60%;margin: 0 auto;margin-bottom: 24px;">
+                <div class="admin-user-name">用户名</div>
+                <div class="admin-btn-delete-user" user_id="'+data.userId+'">操作</div>
+                </div>
                 <div class="mbody" id="user_admin_content" style="text-align: left;width: 60%;">
 
                 </div>
             </div>
             <div class="layui-tab-item">
+                <div class="shop-cart-item" style="background-color: #ffffff;border: none;font-weight: 700;width: 80%;margin-left: 10%;height: 24px;">
+                    <div class="div-img" style="line-height: inherit;text-align: center;">
+                        图片
+                    </div>
+                    <div class="cart-commodity-name" style="font-size: 14px;font-weight: 700;padding: 0px;padding-left: 6px;">商品名称</div>
+                    <div class="cart-commodity-price">价格</div>
+                    <span style="display: inline-block;float:right;margin-right: 12px;" commodity_id="'+data.commodityId+'" class="btn-admin-delete-commodity" sid="'+data.id+'" status="'+data.orderStatis+'">操作</span>
+                </div>
+                <div class="clr"></div>
                 <div class="mbody" id="commodity_admin_content" style="text-align: left;">
 
                 </div>
@@ -160,7 +175,38 @@
                 </div>
             </div>
             <div class="layui-tab-item">
+                <!--<ul class="bussiness-title">-->
+                    <!--<li>图片</li>-->
+                    <!--<li>商品名</li>-->
+                    <!--<li>单价</li>-->
+                    <!--<li>数量</li>-->
+                    <!--<li>总价</li>-->
+                    <!--<li>操作</li>-->
+                <!--</ul>-->
+                <div class="shop-cart-item" style="width: 80%;margin-left: 10%;border: none;font-weight: 700;background-color: #ffffff;">
+                     <div class="div-img" style="line-height: inherit;text-align: center;">
+                            图片
+                        </div>
+                    <div class="cart-commodity-name" style="line-height: inherit;padding: 0px;padding-left: 6px;font-weight: 700;font-size: 14px;">商品名称</div>
+                    <div class="cart-commodity-price" style="margin-left: -54px;">单价</div>
+                    <div class="cart-commodity-count">
+                        <div class="position-count" style="width: 100%;text-align: right;">
+                            <span class="commodity-count" style="text-align: center;">数量</span>
+                            </div>
+                        </div>
+                    <div class="cart-commodity-totalprice" style="color: #000;">总价</div>
+                    <div class="cart-commodity-admin" style="margin-left: 32px;"><span class="status-admin" ua-id="'+data.id+'" status="'+data.orderStatus+'">状态</span>
+                    </div>
+                    <div class="clr"></div>
+                    </div>
+                <div class="clr"></div>
                 <div class="mbody" style="text-align: left;width: 80%;" id="item_content">
+
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="mbody" style="text-align: left;width: 80%;">
+                    <div id="statistic_chat" style="width: 600px;height: 320px;"></div>
 
                 </div>
             </div>
@@ -181,6 +227,7 @@
 <script type="text/javascript" src="layui/layui.all.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/buy-bussiness.js"></script>
+<script type="text/javascript" src="echarts.js"></script>
 <script type="text/javascript" src="js/personal-center.js"></script>
 <script type="text/javascript" src="js/my-activity.js"></script>
 

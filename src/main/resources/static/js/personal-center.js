@@ -7,6 +7,8 @@ var $commodity_admin_content = $('#commodity_admin_content')
 
 var $user_admin_content = $('#user_admin_content')
 
+var myChart = echarts.init(document.getElementById('statistic_chat'))
+
 var bindAll = function () {
     queryUserInfo()
 
@@ -39,6 +41,14 @@ var bindAll = function () {
                 // $(this).css('display', 'inline-block')
             // }
         // })
+    })
+
+    $('#statistic').on('click', function () {
+        showChat()
+    })
+
+    $('body').on('click', '.layui-form-item', function () {
+        footerPosition()
     })
 
     $('body').on('click', '.btn-receipt', function () {
@@ -289,7 +299,7 @@ var createCommodityItemByBussiness = function (data) {
         '        <div class="cart-commodity-name">'+data.commodityName+'</div>\n' +
         '        <div class="cart-commodity-price" style="margin-left: -54px;"><span>￥</span>'+data.price+'</div>\n' +
         '        <div class="cart-commodity-count">\n' +
-        '            <div class="position-count">\n' +
+        '            <div class="position-count" style="width: 100%;text-align: right;">\n' +
         // '                <input class="btn_num_admin btn_sub" type="button" value="-">\n' +
         '                <span class="commodity-count" style="text-align: center;">'+data.num+'</span>\n' +
         // '                <input class="btn_num_admin btn_add" type="button" value="+" />\n' +
@@ -307,6 +317,129 @@ var createCommodityItemByBussiness = function (data) {
         '    </div>'
 
     return $(tmp)
+}
+
+var showChat = function () {
+    var url = '/sold-statistics'
+    $.get(url, function (res) {
+        if (res.errcode == 1) {
+            var statistic = res.data
+
+            var dataAxis = []
+            var data = []
+            var yMax = 0
+            var dataShadow = []
+
+            Object.keys(statistic).forEach(function (key) {
+                dataAxis.push(key)
+                data.push(statistic[key])
+                if (statistic[key] > yMax) {
+                    yMax = statistic[key]
+                }
+            })
+
+
+
+            for (var i = 0; i < data.length; i++) {
+                dataShadow.push(yMax);
+            }
+
+            var option = {
+                title: {
+                    text: '商品出售统计',
+                    // subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
+                },
+                xAxis: {
+                    data: dataAxis,
+                    axisLabel: {
+                        inside: false,
+                        textStyle: {
+                            color: '#000'
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    z: 10
+                },
+                yAxis: {
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: '#999'
+                        }
+                    }
+                },
+                dataZoom: [
+                    {
+                        type: 'inside'
+                    }
+                ],
+                series: [
+                    { // For shadow
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {color: 'rgba(0,0,0,0.05)'}
+                        },
+                        barGap:'-100%',
+                        barCategoryGap:'40%',
+                        data: dataShadow,
+                        animation: false
+                    },
+                    {
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                        {offset: 0, color: '#83bff6'},
+                                        {offset: 0.5, color: '#188df0'},
+                                        {offset: 1, color: '#188df0'}
+                                    ]
+                                )
+                            },
+                            emphasis: {
+                                color: new echarts.graphic.LinearGradient(
+                                    0, 0, 0, 1,
+                                    [
+                                        {offset: 0, color: '#2378f7'},
+                                        {offset: 0.7, color: '#2378f7'},
+                                        {offset: 1, color: '#83bff6'}
+                                    ]
+                                )
+                            }
+                        },
+                        data: data
+                    }
+                ]
+            };
+
+            myChart.setOption(option)
+
+// Enable data zoom when user click bar.
+            var zoomSize = 6;
+            myChart.on('click', function (params) {
+                console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                myChart.dispatchAction({
+                    type: 'dataZoom',
+                    startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                    endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+                });
+            });
+
+        } else {
+            alert(res.errmsg)
+        }
+    })
 }
 
 var updateUserInfo = function () {
